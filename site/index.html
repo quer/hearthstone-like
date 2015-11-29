@@ -1,0 +1,86 @@
+<html>
+<head>
+	<title>Headstone</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<link rel="stylesheet" type="text/css" href="site/css.css" />
+</head>
+<body>
+	<div id="theBoard">
+		<div id="info"></div>
+		<div id="enemyHand">
+			<div class="card backcard">a</div>
+			<div class="card backcard">a</div>
+			<div class="card backcard">a</div>
+		</div>
+		<div id="enemyPlayer"></div>
+		<div id="theMap">
+			<div id="enemyTeam">	
+				<div class="card">
+					<div class="attack">1</div>
+					<div class="health">2</div>
+					<div class="cost">3</div>
+				</div>
+			</div>
+			<div id="myTeam">
+				<div class="card">
+					<div class="attack">1</div>
+					<div class="health">2</div>
+					<div class="cost">3</div>
+				</div>
+			</div>
+		</div>
+		<div id="nextTurn">Next turn</div>
+		<div id="mydeck">card deck</div>
+		<div id="mygems"></div>
+		<div id="myHand">
+			<div class="card">
+				<div class="attack">1</div>
+				<div class="health">2</div>
+				<div class="cost">3</div>
+			</div>
+		</div>
+	</div>
+	<div id="login">
+		<div class="items">
+			game name
+			<input type="text" id="newPlayerName" name="username">
+			<button type="button" id="newPlayerButton">Start game!</button>
+		</div>
+	</div>
+	<div id="menu">
+		<div class="items">play</div>
+		<div class="items">deck</div>
+		<div class="items">cards</div>
+	</div>
+	<div id="cards">
+		<div id="gameCards">
+		</div>
+		<button type="button" class="backToMenu">back To Menu</button>
+	</div>
+	<div id="decks">
+		<div id="gameDecks">
+		</div>
+		<button type="button" class="backToMenu">back To Menu</button>
+		<button type="button" id="CreaterandomDeck">Create Random deck</button>
+	</div>
+	<div id="play">
+		<div id="gameDecks">
+		</div>
+		<button type="button" class="backToMenu">back To Menu</button>
+	</div>
+	<div id="queue">
+		<div class="items">
+			you are queue'ed!
+		</div>
+	</div>
+	<div id="gameEnd">
+		<div class="items">
+			gameEnd!
+		</div>
+		<button type="button" class="backToMenu">back To Menu</button>
+	</div>
+	<script src="site/jquery-2.1.4.min.js"></script>
+	<script src="site/items.js"></script>
+	<script src="site/core.js"></script>
+</body>
+</html>

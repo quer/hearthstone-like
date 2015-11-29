@@ -1,0 +1,201 @@
+body{
+	background-color: black;
+	color: white;
+}
+/* site box */
+#login, #menu, #cards, #decks, #play, #queue, #gameEnd{
+	display: none;
+	width: 1200px;
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	margin: -400px 0 0 -600px;
+  	background-color: #6F8F64;
+}
+/* game board*/
+#theBoard{
+	display: none;
+}
+#theMap {
+	outline: thick solid #39b54a;
+	width: 1200px;
+	height: 400px;
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	margin: -200px 0 0 -600px;
+  	background-color: white;
+}
+#theMap #enemyTeam, #theMap #myTeam, #myHand, #enemyHand {
+	height: 200px;
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+}
+#enemyTeam{
+	border-bottom: 1px solid black;
+}
+#myTeam{
+	border-top: 1px solid black;
+}
+#myTeam .card[charge="true"] {
+	box-shadow:0px 0px 0px 1px red inset;
+}
+#mygems{
+    position: absolute;
+    right: 300px;
+    bottom: 88px;
+    font-size: 25px;
+}
+#mydeck{
+	position: absolute;
+    top: 50%;
+    right: 0%;
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    background-color: white;
+    color: black;
+}
+#nextTurn{
+	position: absolute;
+    top: 50%;
+    right: 0%;
+    margin-top: -150px;
+    text-align: center;
+    height: 100px;
+    width: 200px;
+    background-color: white;
+    color: black;
+}
+.card{
+	width: 140px;
+	height: 180px;
+	margin: 10px 14px;
+	background-color: #39b54a;
+	display: inline-block;
+  	text-align: left;
+  	position: relative;
+}
+.card .attack, .card .health, .card .cost{
+	width: 10px;
+	height: 20px;
+	outline: thin solid blue;
+}
+.card .attack{
+	position: absolute;
+	bottom: 10;
+	left: 10;
+}
+.card .health {
+	position: absolute;
+	bottom: 10;
+	right: 10;
+}
+.card .cost {
+	position: absolute;
+	top: 10;
+	left: 10;
+}
+.card .data {
+    position: absolute;
+    left: 10;
+    width: 120px;
+    top: 90px;
+    outline: thin solid blue;
+}
+.backcard{
+	background-color: brown;
+	background-size: 140px 180px;
+    background-repeat: no-repeat;
+}
+#enemyHand, #myHand{
+	position: absolute;
+	left: 50%;
+	margin: -200px 0 0 -600px;
+	text-align: center;
+}
+#myHand{
+	bottom: 0px;
+}
+#enemyHand{
+	top: 200px;
+}
+#enemyPlayer{
+	position: absolute;
+    left: 50%;
+    margin: 0 0 0 -200px;
+    text-align: center;
+    top: 0px;
+    background-color: red;
+    height: 200px;
+    width: 400px;
+}
+/**
+*  login
+*/
+#login{
+	display: block;
+}
+#login input, #login button{
+	font-size: 50px;
+}
+#login input{
+	width: 597px;
+}
+/**
+*  menu
+*/
+#menu{
+
+}
+#menu .items, #login .items, #queue .items, #gameEnd .items{
+	width: 1140px;
+    text-align: center;
+    font-size: 50px;
+    padding: 30px;
+    color: black;
+    font-weight: bolder;
+}
+#menu .items:hover{
+	background-color: #302EAB;
+}
+/**
+*  play
+*/
+#play{
+
+}
+/**
+*  cards
+*/
+#cards{
+
+}
+/**
+*  decks
+*/
+#decks{
+	display: none;
+	width: 1200px;
+  	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	margin: -400px 0 0 -600px;
+  	background-color: #6F8F64;
+}
+#decks #gameDecks .deck, #play #gameDecks .deck{
+	width: 372px;
+	height: 180px;
+	margin: 10px 14px;
+	background-color: #39b54a;
+	display: inline-block;
+  	text-align: left;
+  	position: relative;
+}
+/**
+* queue
+*/
+#queue{
+
+}
