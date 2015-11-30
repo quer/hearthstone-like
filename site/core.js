@@ -304,6 +304,7 @@ jQuery(function($) {
 			myTeam += createCardHtml(data.myTable[i].Card);
 		};
 		$( "#theBoard #theMap #myTeam" ).html(myTeam);
+		$( "#theBoard #enemygems" ).html(data.enemy.gemsLeft+" tilbage ud af "+ data.enemy.turns)
 		$( "#theBoard #mygems" ).html(data.gemsLeft+" tilbage ud af "+ data.turns);
 		$( "#theBoard #info" ).html("turn: "+ data.turn+ "<br>turns: "+ data.turns+ "<br>my live: "+ data.myLife+ "<br>cards Left: "+ data.cardsLeft);
 		$( "#theBoard #enemyPlayer" ).html("enemy lives back: "+ data.enemyLife);

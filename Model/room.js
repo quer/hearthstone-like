@@ -87,6 +87,7 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 			return true;
 		}else{
 			console.log("attack card(isACardTaunt)");
+			var haveTaunt
 			var otherPlayer = this.getOtherPlayer(name);
 			for (var i = 0; i < otherPlayer.player.TableDeck.length; i++) {
 				if(otherPlayer.player.TableDeck[i].Card.id == selectedCard && otherPlayer.player.TableDeck[i].Card.taunt == true){
@@ -95,6 +96,7 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 					return false;
 				}
 			};
+			if (true) {};
 			return true;
 		}
 	}
@@ -115,7 +117,8 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 			turns: this.player1.turns,
 			enemyHand: this.player2.HandDeck.length,
 			enemyTable: this.getHtmlTableArrayCard(this.player2.TableDeck),
-			turn: this.getPlayerTurn("1")
+			turn: this.getPlayerTurn("1"),
+			enemy: {gemsLeft: this.player2.gemsLeft, turns: this.player2.turns}
 		}
 		var player2HtmlReturn = {
 			myLife: this.player2.life,
@@ -127,7 +130,8 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 			turns: this.player2.turns,
 			enemyHand: this.player1.HandDeck.length,
 			enemyTable: this.getHtmlTableArrayCard(this.player1.TableDeck),
-			turn: this.getPlayerTurn("2")
+			turn: this.getPlayerTurn("2"),
+			enemy: {gemsLeft: this.player2.gemsLeft, turns: this.player2.turns}
 		};
 		this.player1.socket.emit('updateGame', player1HtmlReturn);
 		this.player2.socket.emit('updateGame', player2HtmlReturn);
@@ -198,7 +202,7 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 		if (player.turn == true) {
 			if (this.isACardTaunt(name, attackId)) {
 				for (var i = 0; i < player.player.TableDeck.length; i++) {
-					if(player.player.TableDeck[i].Card.id == id){
+					if(player.player.TableDeck[i].Card.id == id && player.player.TableDeck[i].Card.charge == true){
 						var playerCard = player.player.TableDeck[i].Card;
 						/* kigger efter modstander kort*/
 						for (var ii = 0; ii < otherPlayer.player.TableDeck.length; ii++) {
@@ -223,6 +227,7 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 						console.log("enemy card no exist(useCard)");
 					} 
 				};
+				console.log("that card is not active(useCard)");
 			}else{
 				console.log("have to attack a taunt first(useCard)");
 				return false;
@@ -237,7 +242,7 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 		if (player.turn == true) {
 			if(this.isACardTaunt(name, -1)){
 				for (var i = 0; i < player.player.TableDeck.length; i++) {
-					if(player.player.TableDeck[i].Card.id == id){
+					if(player.player.TableDeck[i].Card.id == id && player.player.TableDeck[i].Card.charge == true){
 						var playerCard = player.player.TableDeck[i].Card;
 						otherPlayer.player.life -= playerCard.attack;
 						if (otherPlayer.player.life < 1) {

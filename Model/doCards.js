@@ -15,7 +15,7 @@ module.exports = function (CardContainer) {
 			randomsummon = summon[doRandom(6, 0)-1];
 		}
 		var text = "";
-		if (randomcharge == true) {text +="<b>Charge</b>"};
+		if (randomcharge == true) {text +="<b>Charge</b> "};
 		if (randomsummon != null) {
 			var getCard = CardContainer.findCard(randomsummon[0]);
 			text +="<b>battlecry</b> summon "+randomsummon[1]+" "+getCard.attack+"/"+getCard.health+" af "+randomsummon[0]+" ";

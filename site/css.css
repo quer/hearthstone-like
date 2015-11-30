@@ -35,6 +35,13 @@ body{
 #enemyTeam{
 	border-bottom: 1px solid black;
 }
+
+#enemygems{
+    position: absolute;
+    right: 300px;
+    top: 88px;
+    font-size: 25px;
+}
 #myTeam{
 	border-top: 1px solid black;
 }
