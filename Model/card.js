@@ -29,6 +29,6 @@ module.exports = function (name, cardTamplate, text, attack, health, cost, charg
 				"taunt: " + this.taunt + "\n";
 	}
 	this.htmlOutput = function(){
-		return {id: this.id, name: this.name, attack: this.attack, health: this.health, cost: this.cost, text: this.text, charge: this.charge};
+		return {id: this.id, name: this.name, attack: this.attack, health: this.health, cost: this.cost, text: this.text, charge: this.charge, taunt: this.taunt, cardTamplate: this.cardTamplate};
 	}
 }

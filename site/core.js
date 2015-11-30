@@ -142,6 +142,7 @@ jQuery(function($) {
 			var cardId = $(this).attr("cardId");
 			socket.emit('useCard', activeCardId, cardId,  function(data){
 				if (data.status) {
+					activeCardId = null;
 					console.log("move done");
 				}else{
 					console.log("noget kig galt server side");
@@ -154,6 +155,7 @@ jQuery(function($) {
 		if(activeCardId != null){
 			socket.emit('useCardOnPlayer', activeCardId,  function(data){
 				if (data.status) {
+					activeCardId = null;
 					console.log("move done on player");
 				}else{
 					console.log("noget kig galt server side");
@@ -233,8 +235,8 @@ jQuery(function($) {
 			}
 		});
 	}
-	function createCardHtml (data, charge) {
-		return '<div class="card" charge="'+data.charge+'" cardId="'+data.id+'"><div class="attack">'+data.attack+'</div><div class="health">'+data.health+'</div><div class="cost">'+data.cost+'</div><div class="data">'+data.text+'</div></div>';
+	function createCardHtml (data) {
+		return '<div class="card" style="background-image: url(\'site/image/'+data.cardTamplate+'\');" taunt="'+data.taunt+'" charge="'+data.charge+'" cardId="'+data.id+'"><div class="attack">'+data.attack+'</div><div class="health">'+data.health+'</div><div class="cost">'+data.cost+'</div><div class="data">'+data.text+'</div></div>';
 	}
 	function createDeckHtml (data) {
 		return '<div class="deck" deckName="'+data+'">'+data+'</div>';

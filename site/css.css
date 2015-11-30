@@ -69,43 +69,54 @@ body{
     color: black;
 }
 .card{
-	width: 140px;
-	height: 180px;
-	margin: 10px 14px;
-	background-color: #39b54a;
+	width: 170px;
+	height: 200px;
 	display: inline-block;
-  	text-align: left;
-  	position: relative;
+  text-align: left;
+  position: relative;
+  background-size: 170px 200px;
 }
 .card .attack, .card .health, .card .cost{
 	width: 10px;
 	height: 20px;
-	outline: thin solid blue;
 }
 .card .attack{
 	position: absolute;
-	bottom: 10;
-	left: 10;
+	bottom: 6px;
+	left: 21px;
 }
 .card .health {
 	position: absolute;
-	bottom: 10;
-	right: 10;
+	bottom: 6px;
+	right: 12px;
 }
 .card .cost {
 	position: absolute;
-	top: 10;
-	left: 10;
+	top: 13px;
+	left: 19px;
 }
 .card .data {
     position: absolute;
-    left: 10;
-    width: 120px;
-    top: 90px;
-    outline: thin solid blue;
+    left: 10px;
+    width: 115px;
+    top: 128px;
+    padding: 0px 18px;
+}
+.card[taunt="true"] {
+    position: relative;
+    display: inline-block;
+}
+.card[taunt="true"]:before {
+    position: absolute;
+    content: "";
+    left: 55px;
+    top: 28px;
+    width: 63px;
+    background-color: blue;
+    height: 77px;
 }
 .backcard{
-	background-color: brown;
+	background-image: url("image/backcard.png");
 	background-size: 140px 180px;
     background-repeat: no-repeat;
 }
