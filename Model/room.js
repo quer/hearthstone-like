@@ -138,16 +138,15 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 	}
 	this.picCard = function (name, bypass) {
 		var player = this.getPlayer(name);
-		console.log("player.turn: "+player.turn + "player.player.havePickCard: "+ player.player.havePickCard);
-		if (((player.turn == true && player.player.havePickCard == false) || bypass !== undefined) && player.player.Deck.cardList.length > 0) {
+		//console.log("player.turn: "+player.turn + "player.player.havePickCard: "+ player.player.havePickCard);
+		if (((player.turn == true) || bypass !== undefined) && player.player.Deck.cardList.length > 0) {
 			var cardPicked = player.player.Deck.cardList[0];
-			console.log(cardPicked);
+			//console.log(cardPicked);
 			player.player.HandDeck.push(cardPicked);
 			player.player.Deck.removeCard(0);
 			/* socket: update game */
 			if (bypass === undefined) {
 				this.updateGame();
-				player.player.havePickCard = true;
 			};
 			return true
 		}else{
@@ -278,6 +277,12 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 		}
 		return false;
 	}
+	this.playerQuit = function (name) {
+		var player = this.getOtherPlayer(name);
+		player.player.socket.emit('gameEnd', true);
+		RoomContainer.removeroom(this.id);
+		return true;
+	}
 	/* skal opdater i fremtiden*/
 	this.endturn = function (name) {
 		var player = this.getPlayer(name);
@@ -291,8 +296,11 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 				player.player.turns += 1;
 			};
 			player.player.gemsLeft = player.player.turns;
-			this.player1.havePickCard = false;
-			this.player2.havePickCard = false;
+			if (this.turn == 0) {
+				this.picCard(player1.name);
+			}else{
+				this.picCard(player2.name);
+			}
 			for (var i = 0; i < player.player.TableDeck.length; i++) {
 				player.player.TableDeck[i].charge = true;
 				player.player.TableDeck[i].Card.charge = true;
@@ -310,5 +318,8 @@ module.exports = function(player1, player2, player1Deck, player2Deck) {
 	this.picCard(player2.name, true);
 	this.picCard(player2.name, true);
 	this.picCard(player2.name, true);
+	/* will pick a card for the start player*/
+	this.picCard(player1.name);
+	this.picCard(player2.name);
 	
 }

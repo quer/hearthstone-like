@@ -2,7 +2,6 @@ module.exports = function(name, socket) {
 	this.name = name;
 	this.socket = socket;
 	this.deckList = new Array();
-	this.games = 0;
 	this.addDeck = function(deck){
 		this.deckList.push(deck);
 	}

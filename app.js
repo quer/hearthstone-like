@@ -76,59 +76,73 @@ io.sockets.on('connection', function (socket) {
     //console.log("send card list");
   });
   socket.on('CreaterandomDeck', function (callback){
-    var userData = UserContainer.finduser(socket.playerName);
-    var randomNewDeck = CardContainer.createRandomDeck("randomNewDeck"+userData.deckList.length);
-    userData.addDeck(randomNewDeck);
-    callback({status:true});
+    if (socket.playerName) {
+      var userData = UserContainer.finduser(socket.playerName);
+      var randomNewDeck = CardContainer.createRandomDeck("randomNewDeck"+userData.deckList.length);
+      userData.addDeck(randomNewDeck);
+      callback({status:true});
+    }
   });
   socket.on('getDeckCards', function (deckName, callback){
-    var userData = UserContainer.finduser(socket.playerName);
-    var userDeck = userData.findDeck(deckName);
-    callback({status:true, items: userDeck.htmlOutput()})
+    if (socket.playerName) {
+      var userData = UserContainer.finduser(socket.playerName);
+      var userDeck = userData.findDeck(deckName);
+      callback({status:true, items: userDeck.htmlOutput()})
+    }
   });
   /* the game */
-  socket.on('picCard', function (callback){
+  socket.on('nextTurn', function (callback){
     if (socket.playerName) {
       var playerRoom = RoomContainer.findroom(socket.playerName);
-      if (playerRoom.picCard(socket.playerName)) {
+      if (playerRoom.endturn(socket.playerName)) {
         callback({status:true});
       }else{
         callback({status:false});
       }
-    };
-  });
-  socket.on('nextTurn', function (callback){
-    var playerRoom = RoomContainer.findroom(socket.playerName);
-    if (playerRoom.endturn(socket.playerName)) {
-      callback({status:true});
-    }else{
-      callback({status:false});
     }
   });
   socket.on('activeCard', function (cardId, callback){
-    var playerRoom = RoomContainer.findroom(socket.playerName);
-    if (playerRoom.activeCard(socket.playerName, cardId)) {
-      callback({status:true});
-    }else{
-      callback({status:false});
+    if (socket.playerName) {
+      var playerRoom = RoomContainer.findroom(socket.playerName);
+      if (playerRoom.activeCard(socket.playerName, cardId)) {
+        callback({status:true});
+      }else{
+        callback({status:false});
+      }
     }
   });
   socket.on('useCard', function (cardId, enemyCardId, callback){
-    var playerRoom = RoomContainer.findroom(socket.playerName);
-    if (playerRoom.useCard(socket.playerName, cardId, enemyCardId)) {
-      callback({status:true});
-    }else{
-      callback({status:false});
+    if (socket.playerName) {
+      var playerRoom = RoomContainer.findroom(socket.playerName);
+      if (playerRoom.useCard(socket.playerName, cardId, enemyCardId)) {
+        callback({status:true});
+      }else{
+        callback({status:false});
+      }
     }
   });
   socket.on('useCardOnPlayer', function (cardId, callback) {
-    var playerRoom = RoomContainer.findroom(socket.playerName);
-    if (playerRoom.useCardOnPlayer(socket.playerName, cardId)) {
-      callback({status:true});
-    }else{
-      callback({status:false});
+    if (socket.playerName) {
+      var playerRoom = RoomContainer.findroom(socket.playerName);
+      if (playerRoom.useCardOnPlayer(socket.playerName, cardId)) {
+        callback({status:true});
+      }else{
+        callback({status:false});
+      }
     }
-  })
+  });
+  socket.on('disconnect', function(){
+    if (socket.playerName) {
+      console.log('user disconnected: '+dcUser);
+      var dcUser = socket.playerName;
+      var userRoom = RoomContainer.findroom(dcUser);
+      if (userRoom != null) {
+        userRoom.playerQuit(dcUser);
+      };
+      UserContainer.removeuser(dcUser);
+    }
+  });
+
 });
 console.log("cards in container: "+CardContainer.cardList.length);
 /* loop */

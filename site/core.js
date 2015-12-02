@@ -103,15 +103,7 @@ jQuery(function($) {
 			console.log("not a deck");
 		}
 	});
-	$("#theBoard").on("click", "#mydeck", function(){
-		socket.emit('picCard', function(data){
-			if (data.status) {
-				console.log("card pick up");
-			}else{
-				console.log("fail");
-			}
-		});
-	}).on("click", "#nextTurn", function () {
+	$("#theBoard").on("click", "#nextTurn", function () {
 		socket.emit('nextTurn', function(data){
 			activeCardId = null;
 			if (data.status) {
@@ -236,7 +228,7 @@ jQuery(function($) {
 		});
 	}
 	function createCardHtml (data) {
-		return '<div class="card" style="background-image: url(\'site/image/'+data.cardTamplate+'\');" taunt="'+data.taunt+'" charge="'+data.charge+'" cardId="'+data.id+'"><div class="attack">'+data.attack+'</div><div class="health">'+data.health+'</div><div class="cost">'+data.cost+'</div><div class="data">'+data.text+'</div></div>';
+		return '<div class="card" taunt="'+data.taunt+'" charge="'+data.charge+'" cardId="'+data.id+'"><div class="cardImage"><img src="'+data.cardImage+'"></div><div class="cardDesigh" style="background-image: url(\'site/image/'+data.cardTamplate+'\');" ><div class="attack">'+data.attack+'</div><div class="health">'+data.health+'</div><div class="cost">'+data.cost+'</div><div class="data">'+data.text+'</div></div></div>';
 	}
 	function createDeckHtml (data) {
 		return '<div class="deck" deckName="'+data+'">'+data+'</div>';
